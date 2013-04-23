@@ -63,24 +63,24 @@ def getStatus():
         global alarmTriggered
         global alarmStatus
         lines = tuple(open('alarm.txt', encoding='utf-8', mode = 'r'))
-        alarmTriggered = lines[0]
-        alarmStatus = lines[1]
+        alarmTriggered = lines[1]
+        alarmStatus = lines[0]
         
 	
 # Function that will either send detils of the alarm to the client if the password matches that of the server. If this password is incorrect a password error message will be sent to the client
 def sendMessage():
-	if clientpass == password:
-		print('Password Accepted')
-		print('Sending data to', client_address)
-		alarmMessage =("Alarm Status:" + alarmStatus + "\nAlarm Triggered:" +alarmTriggered)
-		connection.sendall(alarmMessage.encode('utf-8'))
-		print('Finished sending data to', client_address)
-	else:
-                
-		connection.sendall(passerror.encode('utf-8'))
-		print('Password recieved from', client_address, 'is incorrect')
+        if clientpass == password:
+                print('Password Accepted')
+                print('Sending data to', client_address)
+                alarmMessage =("Alarm Status:" + alarmStatus + "Alarm Triggered:" +alarmTriggered)
+                connection.sendall(alarmMessage.encode('utf-8'))
+                print('Finished sending data to', client_address)
+        else:
+                passerror =('Password incorrect, please try again')
+                connection.sendall(passerror.encode('utf-8'))
+                print('Password recieved from', client_address, 'is incorrect')
 		
-	
+		
 # Set up the server address, port and password		
 serverAdd()
 serverPort()
