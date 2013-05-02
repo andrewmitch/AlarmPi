@@ -98,8 +98,9 @@ def alarmLive(root):
         global alarmTriggered
         frontSensor = GPIO.input(16)
         backSensor = GPIO.input(18)
+        print(frontSensor, backSensor)
         while (alarmStatus is 'On'):
-                if (sensorChoice == 'Both')and (frontSensor == True) or (backSensor == True):
+                if (sensorChoice == 'Both') and (frontSensor == True) or (backSensor == True):
                         alarmTriggered = True
                         break
                 elif (sensorChoice == 'Front') and (frontSensor == True):
